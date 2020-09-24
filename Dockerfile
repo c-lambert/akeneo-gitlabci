@@ -8,4 +8,9 @@ RUN apt-get update && apt-get -qq -y install \
                    openssh-client \
                    nodejs \
                    yarn
+
+RUN pecl install apcu \
+        && docker-php-ext-enable apcu \
+        && pecl clear-cache
+
 RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer
